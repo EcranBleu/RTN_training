@@ -16,6 +16,7 @@ def port_80(thread_id):
 	sock = socket.socket()
 	print('Scanning port 80')
 	host = socket.gethostname()
+	#Using the connect_ex method, which sends back a Windows error code because the port is not accessible
 	scan = sock.connect_ex((host, 80))
 	if scan == 0:
 		port_scan_dict['Port 80'] = 'open'
