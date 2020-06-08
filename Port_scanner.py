@@ -59,7 +59,7 @@ def main():
 
 
 	#Create a single loop which launches every thread with a 2 second difference so as to display the output correctly 
-	#and avoid the last thread output to overlap with the dictionary output
+	#and prevent the last thread output to overlap with the dictionary output
 	
 	for i in range(1):
 
