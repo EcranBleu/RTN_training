@@ -74,6 +74,8 @@ def main():
 
 		thread_21.start()
 
+		time.sleep(2)
+
 	print(port_scan_dict)
 
 
