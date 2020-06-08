@@ -1,8 +1,16 @@
+#Importing modules
+
 import socket
 from threading import Thread 
 import time
 
+
+#Creating an empty dictionary
+
 port_scan_dict = {}
+
+
+#Creating a thread per port scanned
 
 def port_80(thread_id):
 	sock = socket.socket()
@@ -49,6 +57,9 @@ def port_21(thread_id):
 def main():
 
 
+	#Create a single loop which launches every thread with a 2 second difference so as to display the output correctly 
+	#and avoid the last thread output to overlap with the dictionary output
+	
 	for i in range(1):
 
 
