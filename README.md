@@ -1,0 +1,1 @@
+Contents of this repository are training exercises for the Udemy RedTeam Nation course. All code is homemade and probably non-optimized since I am new to programming.
