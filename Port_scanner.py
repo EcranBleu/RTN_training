@@ -1,101 +1,25 @@
-#Importing modules
-
 import socket
-from threading import Thread 
-import time
 
-
-#Creating an empty dictionary
+port_list = [80, 22, 443, 21]
 
 port_scan_dict = {}
 
 
-#Creating a thread per port scanned
-
-def port_80(thread_id):
-	sock = socket.socket()
-	print('Scanning port 80')
-	host = socket.gethostname()
-	#Using the connect_ex method, which will determine the value of the port's status
-	scan = sock.connect_ex((host, 80))
-	if scan == 0:
-		port_scan_dict['Port 80'] = 'open'
-	else:
-		port_scan_dict['Port 80'] = 'closed'
-	sock.close()
-def port_22(thread_id):
-	sock = socket.socket()
-	print('Scanning port 22')
-	host = socket.gethostname()
-	scan = sock.connect_ex((host, 22))
-	if scan == 0:
-		port_scan_dict['Port 22'] = 'open'
-	else:
-		port_scan_dict['Port 22'] = 'closed'
-	sock.close()
-def port_443(thread_id):
-	sock = socket.socket()
-	print('Scanning port 443')
-	host = socket.gethostname()
-	scan = sock.connect_ex((host, 443))
-	if scan == 0:
-		port_scan_dict['Port 443'] = 'open'
-	else:
-		port_scan_dict['Port 443'] = 'closed'
-	sock.close()
-def port_21(thread_id):
-	sock = socket.socket()
-	print('Scanning port 21')
-	host = socket.gethostname()
-	scan = sock.connect_ex((host, 21))
-	if scan == 0:
-		port_scan_dict['Port 21'] = 'open'
-	else:
-		port_scan_dict['Port 21'] = 'closed'
-	sock.close()
-
+def scanned_port():
+	for i in port_list:
+		sock = socket.socket()
+		print(f'Scanning port {i}')
+		host = socket.gethostname()
+		scan = sock.connect_ex((host, i))
+		if scan == 0:
+			port_scan_dict[f'Port {i}'] = 'open'
+		else:
+			port_scan_dict[f'Port {i}'] = 'closed'
+		sock.close()
+	return port_scan_dict
 
 def main():
-
-
-	#Create a single loop which launches every thread with a 2 second difference so as to display the output correctly 
-	#and prevent the last thread output to overlap with the dictionary output
-	
-	for i in range(1):
-
-
-		thread_80 = Thread(target=port_80, args=(i,))
-
-		thread_80.start()
-
-		time.sleep(2)
-
-		thread_22 = Thread(target=port_22, args=(i,))
-
-		thread_22.start()
-
-		time.sleep(2)
-
-		thread_443 = Thread(target=port_443, args=(i,))
-
-		thread_443.start()
-
-		time.sleep(2)
-
-		thread_21 = Thread(target=port_21, args=(i,))
-
-		thread_21.start()
-
-		time.sleep(2)
-
-	print(port_scan_dict)
-
-
-
-
-
-
+	print(scanned_port())
 
 if __name__ == '__main__':
-
 	main() 
